@@ -8,7 +8,7 @@
     <artifactId>pulsecore-api</artifactId>
     <packaging>jar</packaging>
     <name>PulseCoreAPI</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
@@ -21,19 +21,8 @@
     <parent>
         <groupId>com.pandapulsestudios</groupId>
         <artifactId>pulsecore-parent</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>1.0.6-SNAPSHOT</version>
     </parent>
-
-    <repositories>
-        <repository>
-            <id>placeholderapi</id>
-            <url>https://repo.extendedclip.com/content/repositories/placeholderapi/</url>
-        </repository>
-        <repository>
-            <id>sk89q-repo</id>
-            <url>https://maven.enginehub.org/repo/</url>
-        </repository>
-    </repositories>
 
     <dependencies>
         <dependency>
@@ -42,30 +31,6 @@
             <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
             <classifier>remapped-mojang</classifier>
-        </dependency>
-        <dependency>
-            <groupId>me.clip</groupId>
-            <artifactId>placeholderapi</artifactId>
-            <version>2.11.5</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>1.18.32</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q.worldedit</groupId>
-            <artifactId>worldedit-core</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.sk89q.worldguard</groupId>
-            <artifactId>worldguard-bukkit</artifactId>
-            <version>LATEST</version>
-            <scope>provided</scope>
         </dependency>
     </dependencies>
 

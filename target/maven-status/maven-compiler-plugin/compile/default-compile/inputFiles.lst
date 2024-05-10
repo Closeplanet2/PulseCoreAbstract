@@ -14,7 +14,6 @@ D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\j
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_External\SmartInvs\SmartInventory.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\TimerAPI\Object\PulseStopWatch.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\SoundTest.java
-D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\PlayerAPI\API\PlayerAPI.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\RaidRaidStatusTest.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\WarningWarningTest.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\BlockMaskAPI\API\BlockViewerAPI.java
@@ -155,7 +154,6 @@ D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\j
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\ScoreboardAPI\API\ScoreboardAPI.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\Events\Player\PlayerShearEntity.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\CamAPI\API\CamPathAPI.java
-D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\ChatAPI\Enum\FormatPermissions.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\Events\Entity\EntityDamageByBlock.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\RecipeAPI\Interface\PulseRecipe.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\Events\Player\PlayerBucketFill.java
@@ -166,7 +164,6 @@ D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\j
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\SoundCategoryTest.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\Events\Entity\EntityTeleport.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_Common\Events\Entity\EntityCombustByEntity.java
-D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\ActionBarAPI\Object\ActionBarData.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\MovementAPI\API\MovementAPI.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\BookAPI\API\BookAPI.java
 D:\Coding Portfolio\Spigot Plugins\PulseCore\PulseCoreAbstract\Plugin\src\main\java\com\pandapulsestudios\pulsecore\_External\SmartInvs\ClickableItem.java

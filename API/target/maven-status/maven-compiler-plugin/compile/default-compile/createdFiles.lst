@@ -1,1 +1,2 @@
-com\pandapulsestudios\api\Interface\PlayerAPI.class
+com\pandapulsestudios\api\Interface\ActionBarDataNMS.class
+com\pandapulsestudios\api\Interface\PlayerAPINMS.class

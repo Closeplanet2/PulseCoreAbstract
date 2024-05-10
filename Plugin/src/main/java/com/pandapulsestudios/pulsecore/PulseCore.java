@@ -1,6 +1,7 @@
 package com.pandapulsestudios.pulsecore;
 
-import com.pandapulsestudios.api.Interface.PlayerAPI;
+import com.pandapulsestudios.api.Interface.ActionBarDataNMS;
+import com.pandapulsestudios.api.Interface.PlayerAPINMS;
 import com.pandapulsestudios.pulsecore.ActionBarAPI.Object.PulseActionBar;
 import com.pandapulsestudios.pulsecore.AdvancementAPI.Object.Advancement;
 import com.pandapulsestudios.pulsecore.BlockAPI.Interface.PersistentDataCallbacks;
@@ -85,7 +86,6 @@ public final class PulseCore extends JavaPlugin {
     public static ArrayList<TeleportObject> TeleportObjects = new ArrayList<>();
     public static ArrayList<PulseTimer> PulseTimers = new ArrayList<>();
     public static ArrayList<PulseStopWatch> PulseStopWatchs = new ArrayList<>();
-    public static PlayerAPI PlayerAPI;
 
     @Override
     public void onEnable() {
@@ -93,17 +93,6 @@ public final class PulseCore extends JavaPlugin {
         placeholderManager = new PlaceholderManager();
         SmartInvsPlugin = new SmartInvsPlugin(this);
         ClassAPI.RegisterClasses(this);
-
-        String packageName = this.getServer().getClass().getPackage().getName();
-        String version = packageName.substring(packageName.lastIndexOf(".") + 1).toLowerCase();
-        try{
-            final Class<?> clazz = Class.forName("com.pandapulsestudios." + version + ".CustomPlayerAPI");
-            if (PlayerAPI.class.isAssignableFrom(clazz)) PlayerAPI = (PlayerAPI) clazz.getConstructor().newInstance();
-            ChatBuilderAPI.chatBuilder().SendMessage(ChatColor.RED + "Loading support for " + version, true);
-        } catch (ClassNotFoundException | InvocationTargetException | InstantiationException | IllegalAccessException |
-                 NoSuchMethodException e) {
-            throw new RuntimeException(e);
-        }
     }
 
     @Override
@@ -115,5 +104,21 @@ public final class PulseCore extends JavaPlugin {
         for(var pulseTimer : PulseTimers) pulseTimer.cancelTimer();
         for(var pulseStopwatch : PulseStopWatchs) pulseStopwatch.StopTimer();
         for(var hologram : Holograms.values()) hologram.OnDisable();
+        for(var pulseScoreboard : PulseScoreboards.values()) pulseScoreboard.RemoveAllPlayers();
+        for(var pandaBossBar : PandaBossBars.values()) pandaBossBar.RemoveAllPlayers();
+        for(var pandaBossBar : PandaEntityBossBars.values()) pandaBossBar.RemoveAllPlayers();
+        for(var actionBar : PulseActionBars.values()) actionBar.RemoveAllPlayers();
+    }
+
+    public static PlayerAPINMS ReturnPlayerAPI(){
+        String packageName = Bukkit.getServer().getClass().getPackage().getName();
+        String version = packageName.substring(packageName.lastIndexOf(".") + 1).toLowerCase();
+        try{
+            final Class<?> clazz = Class.forName("com.pandapulsestudios." + version + ".CustomPlayerAPI");
+            ChatBuilderAPI.chatBuilder().SendMessage(ChatColor.RED + "Loading support for " + version, true);
+            return (PlayerAPINMS) clazz.getConstructor().newInstance();
+        } catch (ClassNotFoundException | InvocationTargetException | InstantiationException | IllegalAccessException | NoSuchMethodException e) {
+            throw new RuntimeException(e);
+        }
     }
 }

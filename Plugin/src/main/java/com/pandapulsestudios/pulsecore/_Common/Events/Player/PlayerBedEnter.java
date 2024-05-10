@@ -8,7 +8,6 @@ import com.pandapulsestudios.pulsecore.ItemsAPI.API.ItemStackAPI;
 import com.pandapulsestudios.pulsecore.JavaAPI.Interface.PulseAutoRegister;
 import com.pandapulsestudios.pulsecore.LocationAPI.API.LocationAPI;
 import com.pandapulsestudios.pulsecore.NBTAPI.API.NBTAPI;
-import com.pandapulsestudios.pulsecore.PlayerAPI.API.PlayerAPI;
 import com.pandapulsestudios.pulsecore.PlayerAPI.API.PlayerActionAPI;
 import com.pandapulsestudios.pulsecore.PlayerAPI.Enum.PlayerAction;
 import com.pandapulsestudios.pulsecore.PulseCore;

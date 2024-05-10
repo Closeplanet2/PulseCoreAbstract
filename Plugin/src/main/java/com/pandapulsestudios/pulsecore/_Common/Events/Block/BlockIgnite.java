@@ -32,8 +32,10 @@ public class BlockIgnite implements Listener {
             if(!event.isCancelled()) event.setCancelled(state);
         }
 
-        var state1 = PlayerActionAPI.CanPlayerAction(PlayerAction.BlockIgnite, event.getPlayer().getUniqueId());
-        if(!event.isCancelled()) event.setCancelled(!state1);
+        if(event.getPlayer() != null){
+            var state1 = PlayerActionAPI.CanPlayerAction(PlayerAction.BlockIgnite, event.getPlayer().getUniqueId());
+            if(!event.isCancelled()) event.setCancelled(!state1);
+        }
 
         var playerWorld = event.getBlock().getWorld();
         if(PulseCore.PlayerActionLock.containsKey(playerWorld)){

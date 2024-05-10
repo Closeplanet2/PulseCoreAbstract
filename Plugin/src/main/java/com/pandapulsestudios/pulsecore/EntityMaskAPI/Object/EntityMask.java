@@ -19,50 +19,35 @@ import java.util.UUID;
 //TODO add region to limit mask to region
 //TODO same chunk
 public class EntityMask {
-    private final Player player;
-    private final boolean deleteMaskOnNull;
-    private final double minDistance;
-    private final double maxDistance;
-    private final EntityMaskType entityMaskType;
-    private final ArrayList<EntityType> entityTypeExceptions;
-    private final ArrayList<UUID> uuidExceptions;
+    private Player player;
+    private boolean deleteMaskOnNull;
+    private double minDistance;
+    private double maxDistance;
+    private EntityMaskType entityMaskType;
+    private ArrayList<EntityType> entityTypeExceptions = new ArrayList<>();
+    private ArrayList<UUID> uuidExceptions = new ArrayList<>();;
     private ArrayList<Entity> lastFrameEntities = new ArrayList<>();
 
-    public EntityMask(Player player, boolean deleteMaskOnNull, double minDistance, double maxDistance,
-                      EntityMaskType entityMaskType, ArrayList<EntityType> entityTypeExceptions, ArrayList<UUID> uuidExceptions){
-        this.player = player;
-        this.deleteMaskOnNull = deleteMaskOnNull;
-        this.minDistance = minDistance;
-        this.maxDistance = maxDistance;
-        this.entityMaskType = entityMaskType;
-        this.entityTypeExceptions = entityTypeExceptions;
-        this.uuidExceptions = uuidExceptions;
+    public void AddToExceptions(ArrayList<EntityType> entityTypeExceptions){
+        this.entityTypeExceptions.addAll(entityTypeExceptions);
     }
 
-    public void AddToExceptions(ArrayList<EntityType> entityTypeExceptions){
-        for(var type : entityTypeExceptions) if(!entityTypeExceptions.contains(type)) entityTypeExceptions.add(type);
+    public void AddToExceptionsUUID(ArrayList<UUID> uuidExceptions){
+        this.uuidExceptions.addAll(uuidExceptions);
     }
 
     public boolean UpdateEntityMask(){
         if(player == null || !player.isOnline()) return deleteMaskOnNull;
-        player.sendMessage("0");
 
         var newEntityStates = new ArrayList<Entity>();
-
         var playerWorld = player.getWorld();
 
-        player.sendMessage("0.0");
         for(var entity : playerWorld.getEntities()){
-            player.sendMessage("1");
             if(entityTypeExceptions.contains(entity.getType())) continue;
-            player.sendMessage("2");
             if(uuidExceptions.contains(entity.getUniqueId())) continue;
-            player.sendMessage("3");
             if(!IsCorrectForMaskType(entity)) continue;
             var distanceToEntity = player.getLocation().distance(entity.getLocation());
-            player.sendMessage("4");
             if(distanceToEntity < minDistance || distanceToEntity > maxDistance) continue;
-            player.sendMessage("5");
             newEntityStates.add(entity);
         }
 
@@ -75,8 +60,7 @@ public class EntityMask {
     private boolean IsCorrectForMaskType(Entity entity){
         if(entityMaskType == EntityMaskType.Entity) return true;
         if(entityMaskType == EntityMaskType.LivingEntity && entity instanceof LivingEntity) return true;
-        if(entityMaskType == EntityMaskType.Player && entity instanceof Player) return true;
-        return false;
+        return entityMaskType == EntityMaskType.Player && entity instanceof Player;
     }
 
     public void CancelMask(){
@@ -93,12 +77,12 @@ public class EntityMask {
         private ArrayList<EntityType> entityTypeExceptions = new ArrayList<>();
 
         public Builder entityTypeExceptions(ArrayList<EntityType> entityTypeExceptions){
-            for(var type : entityTypeExceptions) if(!entityTypeExceptions.contains(type)) entityTypeExceptions.add(type);
+            this.entityTypeExceptions.addAll(entityTypeExceptions);
             return this;
         }
 
         public Builder uuidExceptions(ArrayList<UUID> uuidExceptions){
-            for(var type : entityTypeExceptions) if(!entityTypeExceptions.contains(type)) entityTypeExceptions.add(type);
+            this.uuidExceptions.addAll(uuidExceptions);
             return this;
         }
 
@@ -128,7 +112,15 @@ public class EntityMask {
                 storedEntityMask.AddToExceptions(entityTypeExceptions);
                 return storedEntityMask;
             }
-            var createdEntityMask = new EntityMask(player, deleteMaskOnNull, minDistance, maxDistance, entityMaskType, entityTypeExceptions, uuidExceptions);
+
+            var createdEntityMask = new EntityMask();
+            createdEntityMask.player = player;
+            createdEntityMask.deleteMaskOnNull = deleteMaskOnNull;
+            createdEntityMask.maxDistance = maxDistance;
+            createdEntityMask.minDistance = minDistance;
+            createdEntityMask.entityMaskType = entityMaskType;
+            createdEntityMask.AddToExceptions(entityTypeExceptions);
+            createdEntityMask.AddToExceptionsUUID(uuidExceptions);
             PulseCore.EntityMasks.put(player.getUniqueId(), createdEntityMask);
             return createdEntityMask;
         }

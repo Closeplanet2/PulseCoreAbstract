@@ -5,11 +5,12 @@ import com.pandapulsestudios.pulsecore.PulseCore;
 import org.bukkit.Bukkit;
 import org.bukkit.NamespacedKey;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.UUID;
 
 public class Advancement {
-    private NamespacedKey key = new NamespacedKey(PulseCore.PulseCore, UUID.randomUUID().toString());
+    private NamespacedKey key;
     private String icon = "icon";
     private String message = "message";
     private Style style = Style.GOAL;
@@ -31,7 +32,7 @@ public class Advancement {
                 "    },\n" +
                 "    \"display\": {\n" +
                 "        \"icon\": {\n" +
-                "            \"item\": \"minecraft:" + icon + "\"\n" +
+                "            \"item\": \"minecraft:" + icon.toLowerCase() + "\"\n" +
                 "        },\n" +
                 "        \"title\": {\n" +
                 "            \"text\": \"" + message.replace("|", "\n") + "\"\n" +
@@ -56,13 +57,13 @@ public class Advancement {
 
     public static AdvancementBuilder AdvancementBuilder(){return new AdvancementBuilder();}
     public static class AdvancementBuilder{
-        private NamespacedKey key = new NamespacedKey(PulseCore.PulseCore, UUID.randomUUID().toString());
+        private String ID;
         private String icon = "icon";
         private String message = "message";
         private Style style = Style.GOAL;
 
-        public AdvancementBuilder key(NamespacedKey key){
-            this.key = key;
+        public AdvancementBuilder key(String ID){
+            this.ID = ID;
             return this;
         }
 
@@ -81,9 +82,9 @@ public class Advancement {
             return this;
         }
 
-        public Advancement Build(){
+        public Advancement Build(JavaPlugin javaPlugin){
             var advancement = new Advancement();
-            advancement.key = key;
+            advancement.key = new NamespacedKey(javaPlugin, ID);
             advancement.icon = icon;
             advancement.message = message;
             advancement.style = style;

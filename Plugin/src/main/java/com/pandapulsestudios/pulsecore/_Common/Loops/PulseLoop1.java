@@ -26,11 +26,12 @@ public class PulseLoop1 implements PulseLoop {
         VanishAPI.UpdateVanishOnAllPlayers();
         for(var player : Bukkit.getOnlinePlayers()) PlayerMove.PlayerMoveLoop(player);
         WorldAPI.HandleLoop();
-        for(var scoreboardName : PulseCore.PulseScoreboards.keySet()) PulseCore.PulseScoreboards.get(scoreboardName).UpdateScoreboard();
+        for(var pulseScoreboard : PulseCore.PulseScoreboards.values()) pulseScoreboard.TickScoreboard();
         for(var pandaBossBar : PulseCore.PandaBossBars.values()) pandaBossBar.TickBossBar();
         for(var pandaBossBar : PulseCore.PandaEntityBossBars.values()) pandaBossBar.TickBossBar();
         for(var blockMask : PulseCore.BlockMasks.values()) if(blockMask.UpdateBlockMask()) blockMask.CancelMask();
         for(var entityMask : PulseCore.EntityMasks.values()) if(entityMask.UpdateEntityMask()) entityMask.CancelMask();
+        for(var actionBar :PulseCore.PulseActionBars.values()) actionBar.TickBossBar();
         for(var locationLimiter : PulseCore.LocationLimiters.values()) locationLimiter.TickLocationLimiter();
     }
 }

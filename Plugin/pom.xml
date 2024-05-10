@@ -8,7 +8,7 @@
     <artifactId>pulsecoreplugin</artifactId>
     <packaging>jar</packaging>
     <name>PulseCorePlugin</name>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.6-SNAPSHOT</version>
 
     <distributionManagement>
         <repository>
@@ -37,9 +37,17 @@
 
     <dependencies>
         <dependency>
+            <groupId>org.spigotmc</groupId>
+            <artifactId>spigot</artifactId>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
+            <scope>provided</scope>
+            <classifier>remapped-mojang</classifier>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
             <groupId>com.pandapulsestudios</groupId>
             <artifactId>pulsecore-v1_20_r1</artifactId>
-            <version>v1_20_r1</version>
+            <version>1.0.6-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
@@ -47,7 +55,7 @@
         <dependency>
             <groupId>com.pandapulsestudios</groupId>
             <artifactId>pulsecore-v1_20_r3</artifactId>
-            <version>v1_20_r3</version>
+            <version>1.0.6-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
@@ -55,17 +63,10 @@
         <dependency>
             <groupId>com.pandapulsestudios</groupId>
             <artifactId>pulsecore-api</artifactId>
-            <version>1.0.0-SNAPSHOT</version>
+            <version>1.0.6-SNAPSHOT</version>
             <type>jar</type>
             <scope>compile</scope>
             <optional>true</optional>
-        </dependency>
-        <dependency>
-            <groupId>org.spigotmc</groupId>
-            <artifactId>spigot</artifactId>
-            <version>1.20.4-R0.1-SNAPSHOT</version>
-            <scope>provided</scope>
-            <classifier>remapped-mojang</classifier>
         </dependency>
         <dependency>
             <groupId>me.clip</groupId>
@@ -82,13 +83,13 @@
         <dependency>
             <groupId>com.sk89q.worldedit</groupId>
             <artifactId>worldedit-core</artifactId>
-            <version>LATEST</version>
+            <version>7.2.9</version>
             <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.sk89q.worldguard</groupId>
             <artifactId>worldguard-bukkit</artifactId>
-            <version>LATEST</version>
+            <version>7.0.5</version>
             <scope>provided</scope>
         </dependency>
     </dependencies>
@@ -155,6 +156,4 @@
             </plugin>
         </plugins>
     </build>
-
-
 </project>

@@ -5,7 +5,6 @@ import com.pandapulsestudios.pulsecore.ActionBarAPI.Object.PulseActionBar;
 import com.pandapulsestudios.pulsecore.BossBarAPI.Object.PulseBossBar;
 import com.pandapulsestudios.pulsecore.BossBarAPI.Object.PulseEntityBossBar;
 import com.pandapulsestudios.pulsecore.ChatAPI.API.MessageAPI;
-import com.pandapulsestudios.pulsecore.ChatAPI.Enum.FormatPermissions;
 import com.pandapulsestudios.pulsecore.PulseCore;
 import net.md_5.bungee.api.ChatMessageType;
 import net.md_5.bungee.api.chat.TextComponent;

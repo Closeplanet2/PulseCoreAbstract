@@ -25,9 +25,9 @@ public class LivePlacement extends BukkitRunnable {
     public LivePlacement(String schematicName, Location location, long fullTimeInSeconds){
         if(!PluginAPI.IsPluginInstalled(PulseCore.PulseCore, SoftDependPlugins.WorldEdit.name())) return;
         var clipboard = WorldEditAPI.LoadSchematic(schematicName);
-        for(var x = clipboard.getMinimumPoint().x(); x < clipboard.getMaximumPoint().x(); x++){
-            for(var y = clipboard.getMinimumPoint().y(); y < clipboard.getMaximumPoint().y(); y++){
-                for(var z = clipboard.getMinimumPoint().z(); z < clipboard.getMaximumPoint().z(); z++){
+        for(var x = clipboard.getMinimumPoint().getX(); x < clipboard.getMaximumPoint().getX(); x++){
+            for(var y = clipboard.getMinimumPoint().getY(); y < clipboard.getMaximumPoint().getY(); y++){
+                for(var z = clipboard.getMinimumPoint().getZ(); z < clipboard.getMaximumPoint().getZ(); z++){
                     var blockState = clipboard.getBlock(BlockVector3.at(x, y, z));
                     var newLocation = location.clone().add(new Vector(x, y, z));
                     blockMap.put(newLocation, BukkitAdapter.adapt(blockState).getMaterial());

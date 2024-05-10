@@ -16,28 +16,22 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class PulseEntityBossBar {
-
-    private final String barID;
-    private final LivingEntity livingEntity;
-    private final BarData barData;
-    private final PandaEntityBossValue pandaEntityBossValue;
-    public final BarFlag[] barFlags;
+    private String barID;
+    private LivingEntity livingEntity;
+    private BarData barData;
+    private PandaEntityBossValue pandaEntityBossValue;
+    private BarFlag[] barFlags;
     private BossBar bossBar;
-
-    private PulseEntityBossBar(LivingEntity livingEntity, String barID, BarData barData, PandaEntityBossValue pandaEntityBossValue, BarFlag... barFlags){
-        this.livingEntity = livingEntity;
-        this.barID = barID;
-        this.barData = barData;
-        this.pandaEntityBossValue = pandaEntityBossValue;
-        this.barFlags = barFlags;
-        ResetBossBar();
-    }
+    private BiConsumer<Double, LivingEntity> onTickConsumer;
 
     public void ResetBossBar(){
         this.bossBar = Bukkit.createBossBar(livingEntity.getCustomName(), barData.barColor(), barData.barStyle(), barFlags);
         this.bossBar.setProgress((Double) livingEntity.getHealth() / livingEntity.getMaxHealth());
+        onTickConsumer.accept(this.bossBar.getProgress(), this.livingEntity);
     }
 
     public void AddPlayer(Player player){
@@ -76,6 +70,7 @@ public class PulseEntityBossBar {
         private BarData barData = new BarData("TITLE", BarColor.BLUE, BarStyle.SEGMENTED_6, 0.5);
         private PandaEntityBossValue pandaEntityBossValue = PandaEntityBossValue.HEALTH;
         private List<Player> toAdd = new ArrayList<>();
+        private BiConsumer<Double, LivingEntity> onTickConsumer;
 
         public Builder barID(String barID){
             this.barID = barID;
@@ -97,13 +92,25 @@ public class PulseEntityBossBar {
             return this;
         }
 
+        public Builder onTickConsumer(BiConsumer<Double, LivingEntity> onTickConsumer){
+            this.onTickConsumer = onTickConsumer;
+            return this;
+        }
+
         public PulseEntityBossBar build(LivingEntity livingEntity, BarFlag... barFlags){
             var storedBossBar = PulseCore.PandaEntityBossBars.getOrDefault(barID, null);
             if(storedBossBar != null){
                 for(var player : toAdd) storedBossBar.AddPlayer(player);
                 return storedBossBar;
             }
-            var createdBossBar = new PulseEntityBossBar(livingEntity, barID, barData, pandaEntityBossValue, barFlags);
+
+            var createdBossBar = new PulseEntityBossBar();
+            createdBossBar.barID = barID;
+            createdBossBar.livingEntity = livingEntity;
+            createdBossBar.barData = barData;
+            createdBossBar.barFlags = barFlags;
+            createdBossBar.pandaEntityBossValue = pandaEntityBossValue;
+            createdBossBar.onTickConsumer = onTickConsumer;
             for(var player : toAdd) createdBossBar.AddPlayer(player);
             PulseCore.PandaEntityBossBars.put(barID, createdBossBar);
             return createdBossBar;

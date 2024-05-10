@@ -1,6 +1,7 @@
 package com.pandapulsestudios.pulsecore.BookAPI.API;
 
 import com.pandapulsestudios.pulsecore.BookAPI.Event.CustomBookOpenEvent;
+import com.pandapulsestudios.pulsecore.ChatAPI.API.MessageAPI;
 import lombok.Setter;
 import net.md_5.bungee.api.chat.BaseComponent;
 import net.md_5.bungee.api.chat.TextComponent;
@@ -33,6 +34,7 @@ public class BookAPI {
         }
 
         public BookBuilder bookPages(String... bookPages){
+            for(var i = 0; i < bookPages.length; i++)  bookPages[i] = MessageAPI.FormatMessage(bookPages[i], true, true, null);
             this.bookMeta.addPage(bookPages);
             return this;
         }

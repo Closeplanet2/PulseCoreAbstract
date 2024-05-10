@@ -1,6 +1,8 @@
 package com.pandapulsestudios.pulsecore.PlayerAPI.Enum;
 
 public enum PlayerAction {
+    Scoreboard,
+    ActionBar,
     BlockBreak,
     BlockCanBuild,
     BlockDamage,

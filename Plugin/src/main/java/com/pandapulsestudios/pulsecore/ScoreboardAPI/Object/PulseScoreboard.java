@@ -1,5 +1,8 @@
 package com.pandapulsestudios.pulsecore.ScoreboardAPI.Object;
 
+import com.pandapulsestudios.pulsecore.ActionBarAPI.Object.PulseActionBar;
+import com.pandapulsestudios.pulsecore.PlayerAPI.API.PlayerActionAPI;
+import com.pandapulsestudios.pulsecore.PlayerAPI.Enum.PlayerAction;
 import com.pandapulsestudios.pulsecore.PulseCore;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -9,75 +12,80 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
+import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public class PulseScoreboard {
-    private String scoreboardID;
     private Scoreboard scoreboard;
-    private HashMap<Integer, PulseScoreboardLines> lineHolder = new HashMap<>();
+    private String scoreboardID = "Scoreboard";
+    private List<PulseScoreboardLines> scoreboardData = new ArrayList<>();
     private int currentPosition = 0;
-    private Integer highestCount = 0;
+    private BiConsumer<Integer, PulseScoreboardLines> onTickConsumer;
 
-    public PulseScoreboard(String scoreboardID, Scoreboard scoreboard, HashMap<Integer, PulseScoreboardLines> lineHolder, Integer highestCount){
-        this.scoreboardID = scoreboardID;
-        this.scoreboard = scoreboard;
-        this.lineHolder = lineHolder;
-        this.highestCount = highestCount;
-        if(lineHolder.containsKey(currentPosition)) lineHolder.get(currentPosition).CreateLine(scoreboard, scoreboardID);
+    public void AddPlayer(Player player){
+        if(!PlayerActionAPI.CanPlayerAction(PlayerAction.Scoreboard, player.getUniqueId())) return;
+        player.setScoreboard(scoreboard);
     }
 
-    public void AddPlayer(Player... players){
-        for(var player : players){
-            player.setScoreboard(scoreboard);
+    public void RemoveAllPlayers(){
+        for(var player : Bukkit.getOnlinePlayers()){
+            RemovePlayer(player);
         }
     }
 
-    public void RemovePlayer(Player... players) {
-        for(var player : players){
-            player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
-        }
+    public void RemovePlayer(Player player) {
+        player.setScoreboard(Bukkit.getScoreboardManager().getMainScoreboard());
     }
 
-    public void UpdateScoreboard(int forcePosition){
-        currentPosition = forcePosition >= highestCount ? currentPosition : forcePosition;
-        lineHolder.get(currentPosition).UpdateLine(scoreboard);
-    }
-
-    public void UpdateScoreboard(){
+    public void TickScoreboard(){
         currentPosition += 1;
-        currentPosition = currentPosition >= highestCount ? 0 : currentPosition;
-        lineHolder.get(currentPosition).UpdateLine(scoreboard);
+        if(currentPosition >= scoreboardData.size()) currentPosition = 0;
+        var bd = scoreboardData.get(currentPosition);
+        if(onTickConsumer != null) onTickConsumer.accept(currentPosition, bd);
+        bd.UpdateLine(scoreboard);
     }
 
     public static PulseScoreboardBuilder builder(){ return new PulseScoreboardBuilder(); }
     public static class PulseScoreboardBuilder {
         private String scoreboardID = "Scoreboard";
-        private List<Player> playerList = new ArrayList<>();
-        private HashMap<Integer, PulseScoreboardLines> lineHolder = new HashMap<>();
-        private int highestCount = 0;
+        private List<Player>  scoreboardPlayers = new ArrayList<>();
+        private List<PulseScoreboardLines>  scoreboardData = new ArrayList<>();
+        private BiConsumer<Integer, PulseScoreboardLines> onTickConsumer;
 
         public PulseScoreboardBuilder scoreboardID(String scoreboardID){
             this.scoreboardID = scoreboardID;
             return this;
         }
 
-        public PulseScoreboardBuilder addLineHolder(Integer amount, PulseScoreboardLines data){
-            for(var i = 0; i < amount; i++){
-                lineHolder.put(highestCount, data);
-                highestCount += 1;
+        public PulseScoreboardBuilder scoreboardData(PulseScoreboardLines data, int numberOfFrames){
+            for(var i = 0; i < numberOfFrames; i++) this.scoreboardData.add(data);
+            return this;
+        }
+
+        public PulseScoreboardBuilder scoreboardPlayers(Player... players){
+            scoreboardPlayers.addAll(Arrays.asList(players));
+            return this;
+        }
+
+        public PulseScoreboardBuilder onTickConsumer(BiConsumer<Integer, PulseScoreboardLines> onTickConsumer){
+            this.onTickConsumer = onTickConsumer;
+            return this;
+        }
+
+        public PulseScoreboard create(){
+            var storedScoreboard = PulseCore.PulseScoreboards.getOrDefault(scoreboardID, null);
+            if(storedScoreboard != null){
+                for(var player : scoreboardPlayers) storedScoreboard.AddPlayer(player);
+                return storedScoreboard;
             }
-            return this;
-        }
 
-        public PulseScoreboardBuilder addPlayer(Player... players){
-            playerList.addAll(Arrays.asList(players));
-            return this;
-        }
-
-        public PulseScoreboard create(boolean replaceExisting){
-            var existingPulseScoreboard = PulseCore.PulseScoreboards.getOrDefault(scoreboardID, null);
-            if(existingPulseScoreboard != null && !replaceExisting) return existingPulseScoreboard;
-            var pulseScoreboard = new PulseScoreboard(scoreboardID, Bukkit.getScoreboardManager().getNewScoreboard(), lineHolder, highestCount);
-            for(var player : playerList) pulseScoreboard.AddPlayer(player);
+            var pulseScoreboard = new PulseScoreboard();
+            pulseScoreboard.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
+            pulseScoreboard.scoreboardID = scoreboardID;
+            pulseScoreboard.scoreboardData.addAll(scoreboardData);
+            pulseScoreboard.onTickConsumer = onTickConsumer;
+            for(var player : scoreboardPlayers) pulseScoreboard.AddPlayer(player);
+            if(!pulseScoreboard.scoreboardData.isEmpty()) pulseScoreboard.scoreboardData.get(0).CreateLine(pulseScoreboard.scoreboard, scoreboardID);
             PulseCore.PulseScoreboards.put(scoreboardID, pulseScoreboard);
             return pulseScoreboard;
         }

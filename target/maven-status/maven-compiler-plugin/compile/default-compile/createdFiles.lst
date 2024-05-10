@@ -50,8 +50,6 @@ com\pandapulsestudios\pulsecore\_Common\Events\Block\BlockBreak.class
 com\pandapulsestudios\pulsecore\_External\SmartInvs\opener\InventoryOpener.class
 com\pandapulsestudios\pulsecore\BossBarAPI\API\PandaBossBarAPI.class
 com\pandapulsestudios\pulsecore\_External\SmartInvs\content\InventoryProvider.class
-com\pandapulsestudios\pulsecore\ActionBarAPI\Object\ActionBarData.class
-com\pandapulsestudios\pulsecore\PlayerAPI\API\PlayerAPI.class
 com\pandapulsestudios\pulsecore\_External\SmartInvs\content\SlotIterator$1.class
 com\pandapulsestudios\pulsecore\HeadAPI\API\HeadAPI.class
 com\pandapulsestudios\pulsecore\WorldEdit\API\LivePlacementAPI.class
@@ -131,7 +129,6 @@ com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\CoalTypeTest.c
 com\pandapulsestudios\pulsecore\_External\SmartInvs\SmartInventory.class
 com\pandapulsestudios\pulsecore\_Common\VariableTests\BukkitEnums\SoundCategoryTest.class
 com\pandapulsestudios\pulsecore\AdvancementAPI\API\AdvancementAPI.class
-com\pandapulsestudios\pulsecore\ChatAPI\Enum\FormatPermissions.class
 com\pandapulsestudios\pulsecore\ChatAPI\Enum\MessageSymbols.class
 com\pandapulsestudios\pulsecore\PluginMessagingChannel\PluginMessageReceivedEvent.class
 com\pandapulsestudios\pulsecore\EntityMaskAPI\API\EntityViewerAPI.class

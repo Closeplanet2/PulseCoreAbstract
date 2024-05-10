@@ -4,7 +4,7 @@
   <groupId>com.pandapulsestudios</groupId>
   <artifactId>pulsecoreplugin</artifactId>
   <name>PulseCorePlugin</name>
-  <version>1.0.0-SNAPSHOT</version>
+  <version>1.0.6-SNAPSHOT</version>
   <build>
     <resources>
       <resource>
@@ -225,6 +225,7 @@
           <groupId>org.apache.maven.resolver</groupId>
         </exclusion>
       </exclusions>
+      <optional>true</optional>
     </dependency>
     <dependency>
       <groupId>me.clip</groupId>
@@ -255,20 +256,12 @@
     <dependency>
       <groupId>com.sk89q.worldedit</groupId>
       <artifactId>worldedit-core</artifactId>
-      <version>LATEST</version>
+      <version>7.2.9</version>
       <scope>provided</scope>
       <exclusions>
         <exclusion>
           <artifactId>core</artifactId>
           <groupId>com.sk89q.worldedit.worldedit-libs</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>lin-bus-tree</artifactId>
-          <groupId>org.enginehub.lin-bus</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>lin-bus-format-snbt</artifactId>
-          <groupId>org.enginehub.lin-bus.format</groupId>
         </exclusion>
         <exclusion>
           <artifactId>antlr4</artifactId>
@@ -295,18 +288,6 @@
           <groupId>com.google.code.gson</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>jchronic</artifactId>
-          <groupId>com.sk89q</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>paranamer</artifactId>
-          <groupId>com.thoughtworks.paranamer</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>jlibnoise</artifactId>
-          <groupId>com.sk89q.lib</groupId>
-        </exclusion>
-        <exclusion>
           <artifactId>log4j-api</artifactId>
           <groupId>org.apache.logging.log4j</groupId>
         </exclusion>
@@ -323,24 +304,28 @@
     <dependency>
       <groupId>com.sk89q.worldguard</groupId>
       <artifactId>worldguard-bukkit</artifactId>
-      <version>LATEST</version>
+      <version>7.0.5</version>
       <scope>provided</scope>
       <exclusions>
-        <exclusion>
-          <artifactId>worldguard-core</artifactId>
-          <groupId>com.sk89q.worldguard</groupId>
-        </exclusion>
         <exclusion>
           <artifactId>worldedit-bukkit</artifactId>
           <groupId>com.sk89q.worldedit</groupId>
         </exclusion>
         <exclusion>
-          <artifactId>guava</artifactId>
-          <groupId>com.google.guava</groupId>
+          <artifactId>worldguard-core</artifactId>
+          <groupId>com.sk89q.worldguard</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commandbook</artifactId>
+          <groupId>com.sk89q</groupId>
         </exclusion>
         <exclusion>
           <artifactId>spigot-api</artifactId>
           <groupId>org.spigotmc</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>guava</artifactId>
+          <groupId>com.google.guava</groupId>
         </exclusion>
       </exclusions>
     </dependency>

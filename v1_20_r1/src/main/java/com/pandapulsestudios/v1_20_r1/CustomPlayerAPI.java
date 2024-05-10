@@ -1,11 +1,10 @@
 package com.pandapulsestudios.v1_20_r1;
 
-import com.pandapulsestudios.api.Interface.PlayerAPI;
+import com.pandapulsestudios.api.Interface.PlayerAPINMS;
 import org.bukkit.craftbukkit.v1_20_R1.entity.CraftPlayer;
 import org.bukkit.entity.Player;
-import org.bukkit.event.inventory.InventoryOpenEvent;
 
-public class CustomPlayerAPI implements PlayerAPI {
+public class CustomPlayerAPI implements PlayerAPINMS {
     @Override
     public String[] GetPlayerTexture(Player player) {
         var currentProfile = ((CraftPlayer) player).getHandle().getGameProfile();
