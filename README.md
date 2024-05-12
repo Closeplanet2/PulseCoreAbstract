@@ -10,7 +10,7 @@
 ```
 <dependency>
   <groupId>com.pandapulsestudios</groupId>
-  <artifactId>pulsecommandsplugin</artifactId>
-  <version>1.0.1-SNAPSHOT</version>
+  <artifactId>pulsecoreplugin</artifactId>
+  <version>1.0.6-SNAPSHOT</version>
 </dependency>
 ```
